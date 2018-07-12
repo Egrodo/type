@@ -1,0 +1,5 @@
+span.Word {
+  font-size: 1.5em;
+  margin: .5rem;
+  display: inline-block;
+}

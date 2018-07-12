@@ -1,0 +1,15 @@
+div.ui.container.View {
+  margin-left: auto;
+  margin-right: auto;
+  padding: .5em;
+  width: 45em;
+  height: 5.5em; /* TODO: This probably isn't best solution */
+  display: block;
+  background-color: rgb(53, 53, 53);
+  user-select: none;
+  overflow: hidden;
+}
+
+div.ui.container.View:hover {
+  cursor: inherit;
+}
