@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import Word from './Word';
+import wordP from './wordProcessing';
 import './View.css';
 
 /*
@@ -16,18 +17,13 @@ class View extends Component {
         [],
         [],
       ],
-      wordCount: 0,
     };
   }
 
   componentDidMount() {
     // When the component first mounts (or if refreshed), generate two rows.
-    // TODO: Generate all this randomly.
-    // Modularize this.
-    const words = ['America', 'happy', 'eat', 'carry', 'to', 'list', 'when', 'when', 'page', 'earth', 'letter', 'which', 'found', 'later', 'saw', 'four', 'why', 'or', 'same', 'sentence'];
-    const row1 = words.slice(0, 10);
-    const row2 = words.slice(10, words.length);
-    this.setState({ wordList: [row1, row2] });
+    // Gonna have to keep track of the cursor.
+    this.setState({ wordList: wordP.init(11) });
   }
 
   loadMore() {
@@ -35,7 +31,7 @@ class View extends Component {
   }
 
   render() {
-    const { wordList, wordCount } = this.state;
+    const { wordList } = this.state;
     return (
       <Container className="View" id="TEST">
         <section className="row">

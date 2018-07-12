@@ -18,7 +18,6 @@ class App extends Component {
       <div className="App">
         <h1>WPM TEST</h1>
         <View />
-
       </div>
     );
   }
