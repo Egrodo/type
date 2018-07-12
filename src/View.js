@@ -18,22 +18,28 @@ class View extends Component {
         [],
       ],
     };
+
+    this.loadMore = this.loadMore.bind(this);
   }
 
   componentDidMount() {
     // When the component first mounts (or if refreshed), generate two rows.
     // Gonna have to keep track of the cursor.
-    this.setState({ wordList: wordP.init(11) });
+    this.setState({ wordList: wordP.init(12) });
   }
 
   loadMore() {
-    // Delete the first row, keep generating more until condition hit.
+    // Replace first row with second, generate new second row.
+    const wordList = [];
+    wordList[0] = this.state.wordList[1];
+    wordList[1] = wordP.newRow(12);
+    this.setState({ wordList });
   }
 
   render() {
     const { wordList } = this.state;
     return (
-      <Container className="View" id="TEST">
+      <Container className="View" onClick={this.loadMore}>
         <section className="row">
           {wordList[0].map((word => <Word word={word} />))}
         </section>

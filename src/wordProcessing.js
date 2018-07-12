@@ -3,15 +3,22 @@ const words = ['the', 'of', 'to', 'and', 'a', 'in', 'is', 'it', 'you', 'that', '
 const randIndex = () => Math.floor((Math.random() * 100));
 
 const init = (count) => {
-  // Return an array of two arrays with 10 random words each.
+  // Return an array of two arrays with count`` random words each.
   const data = [[], []];
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < count; ++i) {
     data[0].push(words[randIndex()]);
     data[1].push(words[randIndex()]);
   }
   return data;
 };
 
+const newRow = (count) => {
+  const data = [];
+  for (let i = 0; i < count; ++i) data.push(words[randIndex()]);
+  return data;
+};
+
 module.exports = {
   init,
+  newRow,
 };
