@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import Word from './Word';
-import wordP from './wordProcessing';
-import './View.css';
+import wordP from '../wordProcessing';
+import '../css/View.css';
 
-/*
-  One strategy:
-    I can keep generating words until the scrollHeight >== clientHeight.
-    Problem there is that I'll need a static height.
-*/
 class View extends Component {
   constructor() {
     super();
@@ -30,18 +25,18 @@ class View extends Component {
 
   loadMore() {
     // Replace first row with second, generate new second row.
-    const wordList = [];
-    wordList[0] = this.state.wordList[1];
-    wordList[1] = wordP.newRow(12);
-    this.setState({ wordList });
+    const { wordList } = this.state;
+    const newList = [wordList[1], wordP.newRow(12)];
+    this.setState({ wordList: newList });
   }
 
   render() {
+    // We're passing down the index for later highlighting.
     const { wordList } = this.state;
     return (
       <Container className="View" onClick={this.loadMore}>
         <section className="row">
-          {wordList[0].map((word => <Word word={word} />))}
+          {wordList[0].map(((word, i) => <Word word={word} index={i} />))}
         </section>
         <section className="row">
           {wordList[1].map((word => <Word word={word} />))}

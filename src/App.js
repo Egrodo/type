@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import View from './View';
-import './App.css';
+import View from './components/View';
+import Input from './components/Input';
+import './css/App.css';
 
 /*
   Typing test
-      TIMER     
+      TIMER
       VIEW
       INPUT | RESET
 
@@ -18,6 +19,7 @@ class App extends Component {
       <div className="App">
         <h1>WPM TEST</h1>
         <View />
+        <Input />
       </div>
     );
   }

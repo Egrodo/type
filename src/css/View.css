@@ -1,10 +1,10 @@
 div.ui.container.View {
   margin-left: auto;
   margin-right: auto;
-  padding: .5em;
+  padding: .5em 2em;
   max-width: 80vw;
-  height: 5.5em; /* TODO: This probably isn't best solution */
-  display: block;
+  height: 5.5em;
+  display: inline-block;
   background-color: rgb(53, 53, 53);
   user-select: none;
 }
