@@ -3,9 +3,10 @@ div.ui.container.View {
   margin-right: auto;
   padding: .5em 2em;
   max-width: 80vw;
+  border-radius: .2em;
   height: 5.5em;
   display: inline-block;
-  background-color: rgb(53, 53, 53);
+  background-color: #212121;
   user-select: none;
 }
 

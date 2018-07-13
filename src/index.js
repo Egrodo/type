@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Controller from './Controller';
 import registerServiceWorker from './registerServiceWorker';
 import 'normalize.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Controller />, document.getElementById('root'));
 registerServiceWorker();
