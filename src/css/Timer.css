@@ -10,3 +10,7 @@ div.Timer button.ui.button.animated:focus {
   box-shadow: 0 0 0 2px #54c8ff inset!important;
   color: #54c8ff;
 }
+
+div.Timer input.hidden {
+  display: none;
+}

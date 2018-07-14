@@ -7,20 +7,25 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
 
+    this.distract = React.createRef();
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
+    // TODO: Store a reference to the input in the Controller, pass it down to here and distract by focusing it.
     // On click, refresh everything with higher function.
-    this.props.refresh();
+    const { refresh } = this.props;
+    refresh();
+
+    // I am 
+    this.distract.current.focus();
   }
 
   render() {
     return (
-      <div className="Timer">
+      <div className="Timer" >
         <Button
           onClick={this.onClick}
           animated="vertical"
@@ -34,6 +39,7 @@ class Timer extends Component {
             <Icon name="refresh" />
           </Button.Content>
         </Button>
+        <input ref={this.distract} className="hidden" />
       </div>
     );
   }

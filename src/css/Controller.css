@@ -15,7 +15,3 @@ div.Controller {
 div.Controller h1 {
   margin: .5em .2em .2em;
 }
-
-div.Controller div:last-child {
-  margin-top: 1em;
-}
