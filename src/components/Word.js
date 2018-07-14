@@ -46,7 +46,7 @@ class Word extends Component {
 
 Word.propTypes = {
   word: PropTypes.string,
-  active: PropTypes.bool,
+  active: PropTypes.number,
 };
 
 Word.defaultProps = {

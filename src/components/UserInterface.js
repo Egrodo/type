@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Input, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import Timer from './Timer';
 import '../css/Input.css';
 
 class UserInterface extends Component {
@@ -8,22 +9,26 @@ class UserInterface extends Component {
     super();
     this.state = {
       input: '',
+      disabled: false,
+      started: false,
     };
 
     this.inpRef = React.createRef();
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.timerEnd = this.timerEnd.bind(this);
   }
 
   onChange(e) {
-    // We're keeping track of the word in two places:
-    //   this UserInterface component so we can have simple controlled inputs
-    //   and the Controller function so we can run compare and submit.
     e.preventDefault();
+    // If the change was a backspace ignore it.
     const word = e.target.value;
     const { onType } = this.props;
-    const { input } = this.state;
+    const { input, started } = this.state;
+    // On change check if we've started a test yet. If we haven't, start the timer.
+    if (!started) this.setState({ started: true });
 
+    // Handle input and spacebar submits.
     if (word[word.length - 1] === ' ') {
       onType(input, true);
       this.setState({ input: '' });
@@ -38,16 +43,23 @@ class UserInterface extends Component {
     const { refresh } = this.props;
     refresh();
     this.inpRef.current.focus();
-    this.setState({ input: '' });
+    this.setState({ input: '', started: false, disabled: false });
+  }
+
+  timerEnd() {
+    const { finish } = this.props;
+    this.setState({ started: false, disabled: true });
+    finish();
   }
 
   render() {
-    const { input } = this.state;
+    const { input, started, disabled } = this.state;
     return (
       <Container className="UserInterface">
         <div className="Input">
           <Input
             onChange={this.onChange}
+            disabled={disabled}
             ref={this.inpRef}
             value={input}
             inverted
@@ -63,7 +75,7 @@ class UserInterface extends Component {
             inverted
           >
             <Button.Content visible>
-              !Timer
+              {started ? <Timer end={this.timerEnd} /> : '1:00'}
             </Button.Content>
             <Button.Content hidden>
               <Icon name="refresh" />
@@ -78,11 +90,13 @@ class UserInterface extends Component {
 UserInterface.propTypes = {
   onType: PropTypes.func,
   refresh: PropTypes.func,
+  finsish: PropTypes.func,
 };
 
 UserInterface.defaultProps = {
   onType: (() => { throw new ReferenceError('onChange not passed.'); }),
   refresh: (() => { throw new ReferenceError('refresh not passed in'); }),
+  finish: (() => { throw new ReferenceError('finish not passed in'); }),
 };
 
 export default UserInterface;

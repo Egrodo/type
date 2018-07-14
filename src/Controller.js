@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import View from './components/View';
 import UserInterface from './components/UserInterface';
+import Results from './components/Results';
 import wordP from './wordProcessing';
 import './css/Controller.css';
 
@@ -33,9 +34,11 @@ class App extends Component {
       active: 0,
       correct: 0,
       incorrect: 0,
+      finalScore: 0,
     };
 
     this.onType = this.onType.bind(this);
+    this.finish = this.finish.bind(this);
     this.refresh = this.refresh.bind(this);
   }
 
@@ -54,13 +57,14 @@ class App extends Component {
     } = this.state;
     const correctWord = wordList[0][cursor];
 
-    // If the input was a spacebar, submit the word.
+    // If the input was a spacebar submit the word.
     if (submit) {
-      // TODO: If space pressed before the word is finished, it's incorrect.
+      // I'm counting the length of the words for each correct / incorrect.
+      // This method isn't entirely accurate (won't count the last word if someone is halfway thru one when timer ends).
       if (correctWord === word) {
-        await this.setState({ correct: correct + 1, active: 1 });
+        await this.setState({ correct: (correct + word.length), active: 1 });
       } else {
-        await this.setState({ incorrect: incorrect + 1, active: 2 });
+        await this.setState({ incorrect: (incorrect + word.length), active: 2 });
       }
       // Check if we're at the end of the row.
       if ((cursor + 1) === wordList[0].length) {
@@ -71,19 +75,29 @@ class App extends Component {
         this.setState({ active: 0 });
       }
     } else if (correctWord.indexOf(word) === 0) {
-      // Otherwise if we're not submitting, check if correct so far.
+      // Else if we're not submitting but it's still correct so far.
       this.setState({ active: 1 });
-    } else this.setState({ active: 2 });
+    } else {
+      // Else if we're not submitting and it's not correct so far.
+      this.setState({ active: 2 });
+    }
   }
 
   refresh() {
     this.setState({
       wordList: wordP.init(12),
-      cursor: 0,
-      active: 0,
       correct: 0,
       incorrect: 0,
+      cursor: 0,
+      active: 0,
     });
+  }
+
+  finish() {
+    // Function to be invoked at the end of the timer.
+    const { correct } = this.state;
+    const finalScore = Math.round(correct / 5);
+    this.setState({ finalScore });
   }
 
   render() {
@@ -93,14 +107,17 @@ class App extends Component {
       active,
       correct,
       incorrect,
+      finalScore,
     } = this.state;
     return (
       <div className="Controller">
         <h1>WPM TEST</h1>
         <View wordList={wordList} cursor={cursor} active={active} />
         <br />
-        <UserInterface onType={this.onType} refresh={this.refresh} />
-        <div>Correct:{correct} Incorrect: {incorrect}</div>
+        <UserInterface onType={this.onType} refresh={this.refresh} finish={this.finish} />
+        <div>
+          {finalScore ? <Results data={{ correct, incorrect, finalScore }} /> : ''}
+        </div>
       </div>
     );
   }
