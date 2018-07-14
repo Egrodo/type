@@ -1,9 +1,13 @@
-div.ui.container.Input {
+div.ui.container.UserInterface {
   display: inline-block;
-  width: 25em;
+  position: relative;
   margin-top: 1em;
 }
 
+div.Input {
+  display: inline-block;
+  width: 25em;
+}
 
 div.ui.input input {
   padding: .5em;
@@ -20,4 +24,23 @@ div.ui.input input:focus {
   color: #fff;
   box-shadow: none;
   background-color: #303030;
+}
+
+div.Timer {
+  display: inline-block;
+  position: absolute;
+  margin-left: 1em;
+  height: 90%;
+  bottom: 5%;
+}
+
+div.Timer button.ui.button.animated {
+  height: 90%;
+}
+
+div.Timer button.ui.button.animated:hover,
+div.Timer button.ui.button.animated:focus {
+  background-color: black;
+  box-shadow: 0 0 0 2px #54c8ff inset!important;
+  color: #54c8ff;
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import View from './components/View';
-import TextInput from './components/TextInput';
-import Timer from './components/Timer';
+import UserInterface from './components/UserInterface';
 import wordP from './wordProcessing';
 import './css/Controller.css';
 
@@ -65,13 +64,11 @@ class App extends Component {
       }
       // Check if we're at the end of the row.
       if ((cursor + 1) === wordList[0].length) {
-        console.log('new row');
         const newList = [wordList[1], wordP.newRow(12)];
         this.setState({ wordList: newList, cursor: 0 });
       } else {
         await this.setState({ cursor: cursor + 1 });
         this.setState({ active: 0 });
-
       }
     } else if (correctWord.indexOf(word) === 0) {
       // Otherwise if we're not submitting, check if correct so far.
@@ -102,8 +99,7 @@ class App extends Component {
         <h1>WPM TEST</h1>
         <View wordList={wordList} cursor={cursor} active={active} />
         <br />
-        <TextInput onType={this.onType} />
-        <Timer refresh={this.refresh} />
+        <UserInterface onType={this.onType} refresh={this.refresh} />
         <div>Correct:{correct} Incorrect: {incorrect}</div>
       </div>
     );
