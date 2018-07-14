@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import View from './components/View';
 import TextInput from './components/TextInput';
+import Timer from './components/Timer';
 import wordP from './wordProcessing';
 import './css/Controller.css';
 
@@ -89,7 +90,9 @@ class App extends Component {
       <div className="Controller">
         <h1>WPM TEST</h1>
         <View wordList={wordList} cursor={cursor} active={active} />
+        <br />
         <TextInput onType={this.onType} />
+        <Timer />
         <div>Correct:{correct} Incorrect: {incorrect}</div>
       </div>
     );
