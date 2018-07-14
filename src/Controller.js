@@ -37,6 +37,7 @@ class App extends Component {
     };
 
     this.onType = this.onType.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +79,16 @@ class App extends Component {
     } else this.setState({ active: 2 });
   }
 
+  refresh() {
+    this.setState({
+      wordList: wordP.init(12),
+      cursor: 0,
+      active: 0,
+      correct: 0,
+      incorrect: 0,
+    });
+  }
+
   render() {
     const {
       wordList,
@@ -92,7 +103,7 @@ class App extends Component {
         <View wordList={wordList} cursor={cursor} active={active} />
         <br />
         <TextInput onType={this.onType} />
-        <Timer />
+        <Timer refresh={this.refresh} />
         <div>Correct:{correct} Incorrect: {incorrect}</div>
       </div>
     );

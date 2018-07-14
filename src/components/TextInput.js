@@ -40,6 +40,7 @@ class TextInput extends Component {
           value={input}
           inverted
           autoFocus
+          fluid
         />
       </Container>
     );

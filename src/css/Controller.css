@@ -3,12 +3,17 @@ body {
   background-color: #000;
   color: white;
   text-align: center;
+  font-size: 1.2em;
 }
 
 div.Controller {
   width: 100vw;
   margin-left: auto;
   margin-right: auto;
+}
+
+div.Controller h1 {
+  margin: .5em .2em .2em;
 }
 
 div.Controller div:last-child {

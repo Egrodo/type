@@ -1,10 +1,10 @@
 div.ui.container.Input {
   display: inline-block;
+  width: 25em;
 }
 
 
 div.ui.input input {
-  width: 30vw;
   padding: .5em;
   font-size: 1.3em;
   border-radius: .2em;
@@ -16,6 +16,7 @@ div.ui.input input {
 }
 
 div.ui.input input:focus {
+  color: #fff;
   box-shadow: none;
   background-color: #303030;
 }
