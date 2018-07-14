@@ -8,6 +8,7 @@ span.Word {
 span.Word.active {
   color: hsla(0, 0%, 100%);
   border-bottom: 2px solid white;
+  /* Custom bottom border solution? */
 }
 
 span.Word.correct {

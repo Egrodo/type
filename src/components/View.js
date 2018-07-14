@@ -5,6 +5,7 @@ import Word from './Word';
 import '../css/View.css';
 
 class View extends Component {
+  // Handle cursor and active here?
   constructor(props) {
     super(props);
 
@@ -12,7 +13,6 @@ class View extends Component {
       cursor: 0,
       active: 0,
     };
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,16 +23,18 @@ class View extends Component {
 
   render() {
     // TODO: Describe ternary to sort active word.
-    const { wordList, loadMore } = this.props;
+    // TODO: Move logic for handling display to here.
+    // Move onType stuff to this function instead so it won't have to re-render every word on each char change.
+    const { wordList } = this.props;
     const { cursor, active } = this.state;
     return (
-      <Container className="View" onClick={loadMore}>
+      <Container className="View">
         <section className="row">
-          {wordList[0].map(((word, i) => (cursor >= i ? (
+          {wordList[0].map(((word, i) => (cursor <= i ? (
             cursor === i ? (<Word word={word} key={`${i}_${word}`} active={active} />) : (
-              <Word word={word} key={`${i}_${word}`} />
+              <Word word={word} key={`${i}_${word}`} active={3} />
             )
-          ) : <Word word={word} index={i} key={`${i}_${word}`} />)
+          ) : <Word word={word} key={`${i}_${word}`} />)
           ))}
         </section>
         <section className="row">
@@ -47,14 +49,12 @@ class View extends Component {
 // TODO: Loadmore is temporarily here.
 View.propTypes = {
   wordList: PropTypes.arrayOf(PropTypes.array),
-  loadMore: PropTypes.func,
   cursor: PropTypes.number,
   active: PropTypes.number,
 };
 
 View.defaultProps = {
   wordList: [['ERROR'], ['WORDLIST NOT PASSED TO VIEW COMPONENT']],
-  loadMore: (() => { throw new ReferenceError('loadMore not passed.'); }),
   cursor: 0,
   active: 0,
 };

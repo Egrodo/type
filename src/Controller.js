@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import View from './components/View';
-import Input from './components/TextInput';
+import TextInput from './components/TextInput';
 import wordP from './wordProcessing';
-import './css/App.css';
+import './css/Controller.css';
 
 /*
   Typing test
@@ -22,7 +22,7 @@ class App extends Component {
     /*
       wordList: a 2d array wherein each array represents a visual row.
       cursor: the index (on the first row/arr) of the word we're currently working with.
-      active: a ternary system representing: 0: active (but untouched), 1: active and correct, 2: active and incorrect.
+      active: a ternary where 0: active & untouched, 1: active & correct, 2: active & incorrect.
     */
     this.state = {
       wordList: [
@@ -31,9 +31,10 @@ class App extends Component {
       ],
       cursor: 0,
       active: 0,
+      correct: 0,
+      incorrect: 0,
     };
 
-    this.loadMore = this.loadMore.bind(this);
     this.onType = this.onType.bind(this);
   }
 
@@ -43,41 +44,53 @@ class App extends Component {
   }
 
   // Handle change at Controller level in order to compare against correct.
-  onType(word, submit = false) {
-    // TODO: Handle row moving up.
-
-    const { wordList, cursor } = this.state;
+  async onType(word, submit = false) {
+    const {
+      wordList,
+      cursor,
+      correct,
+      incorrect,
+    } = this.state;
     const correctWord = wordList[0][cursor];
 
+    // If the input was a spacebar, submit the word.
+    if (submit) {
+      // TODO: If space pressed before the word is finished, it's incorrect.
+      if (correctWord === word) {
+        await this.setState({ correct: correct + 1, active: 1 });
+      } else {
+        await this.setState({ incorrect: incorrect + 1, active: 2 });
+      }
+      // Check if we're at the end of the row.
+      if ((cursor + 1) === wordList[0].length) {
+        console.log('new row');
+        const newList = [wordList[1], wordP.newRow(12)];
+        this.setState({ wordList: newList, cursor: 0 });
+      } else {
+        await this.setState({ cursor: cursor + 1 });
+        this.setState({ active: 0 });
 
-    if (correctWord.includes(word)) {
+      }
+    } else if (correctWord.indexOf(word) === 0) {
+      // Otherwise if we're not submitting, check if correct so far.
       this.setState({ active: 1 });
     } else this.setState({ active: 2 });
-
-    if (submit) {
-      // On submit, compare the words and count score, then increment index.
-      if (correctWord === word) {
-        console.log('Correct!');
-      } else console.log('Incorrect!');
-
-      this.setState({ cursor: cursor + 1 });
-    }
-  }
-
-  loadMore() {
-    // Replace first row with second, generate new second row.
-    const { wordList } = this.state;
-    const newList = [wordList[1], wordP.newRow(12)];
-    this.setState({ wordList: newList, cursor: 0 });
   }
 
   render() {
-    const { wordList, cursor, active } = this.state;
+    const {
+      wordList,
+      cursor,
+      active,
+      correct,
+      incorrect,
+    } = this.state;
     return (
-      <div className="App">
+      <div className="Controller">
         <h1>WPM TEST</h1>
-        <View wordList={wordList} loadMore={this.loadMore} cursor={cursor} active={active} />
-        <Input onType={this.onType} />
+        <View wordList={wordList} cursor={cursor} active={active} />
+        <TextInput onType={this.onType} />
+        <div>Correct:{correct} Incorrect: {incorrect}</div>
       </div>
     );
   }
