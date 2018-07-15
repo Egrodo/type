@@ -20,7 +20,7 @@ div.ui.input input {
   border: none;
 }
 
-div.ui.input input:focus {
+div.ui.input input:focus, div.ui.input input:active {
   color: #fff;
   box-shadow: none;
   background-color: #303030;
