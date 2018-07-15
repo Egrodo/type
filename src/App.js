@@ -72,7 +72,6 @@ class App extends Component {
     // If the input was a spacebar submit the word.
     if (submit) {
       // I'm counting the length of the words for each correct / incorrect plus one for the space.
-      // This method isn't entirely accurate (won't count the last word if someone is halfway thru one when timer ends).
       if (correctWord === word) {
         await this.setState({
           correctChars: (correctChars + word.length) + 1,

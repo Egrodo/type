@@ -5,7 +5,7 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: 5,
+      time: 10,
     };
 
     this.timer = 0;
@@ -20,7 +20,7 @@ class Timer extends Component {
   perSec() {
     const { time } = this.state;
     const { end } = this.props;
-    if (time > 0) {
+    if (time > 1) {
       this.setState({ time: time - 1 });
     } else {
       // If the timer is over, clear it and call the cb.

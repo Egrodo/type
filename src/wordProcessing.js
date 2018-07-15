@@ -18,7 +18,16 @@ const newRow = (count) => {
   return data;
 };
 
+const calcPercent = (score) => {
+  /*
+    Mean = 40 WPM = 240 characters/minute
+    Median = 38 WPM = 228 characters/minute
+    Standard Deviation = 16.7-WPM = 100 characters/minute
+  */
+};
+
 module.exports = {
   init,
   newRow,
+  calcPercent,
 };

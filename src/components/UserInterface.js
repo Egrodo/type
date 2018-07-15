@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Input, Button, Icon } from 'semantic-ui-react';
+import {
+  Container,
+  Input,
+  Button,
+  Icon,
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Timer from './Timer';
 import '../css/Input.css';

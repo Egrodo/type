@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import '../css/Results.css';
 
 const Results = (props) => {
-  // TODO: Color the WPM depending on the score.
   const {
     correctWords,
     incorrectWords,
@@ -13,15 +12,18 @@ const Results = (props) => {
   } = props.data;
 
   const finalScore = Math.round(correctChars / 5);
+  const accuracy = ((correctWords / (correctWords + incorrectWords) * 100)).toFixed(2);
+  // TODO: Calculate percentile from mean.
   return (
     <section className="Results">
       <h1 className="headliner">
         {finalScore}
-        <span title="Words Per Minute">
+        <span title="Words Per Minute (1 word = 5 characters)">
           WPM
         </span>
       </h1>
-      <h4>Top 0.45%</h4>
+      <h4>Top X%</h4>
+      <h4>{accuracy}% Accuracy</h4>
       <h4 className="subInfo">
         (<span>{correctWords}</span>
         +
@@ -51,9 +53,3 @@ Results.defaultProps = {
 };
 
 export default Results;
-/*
-      correctWords,
-      incorrectWords,
-      correctChars,
-      incorrectChars,
-*/
