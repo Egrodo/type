@@ -16,6 +16,10 @@ div.App {
   margin-top: .5em;
 }
 
+div.ui.container.block {
+  display: block;
+}
+
 div.App h1 {
   margin-bottom: .5em;
 }

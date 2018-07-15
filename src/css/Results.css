@@ -1,6 +1,11 @@
+div.container {
+  display: block;
+  width: auto;
+
+}
+
 section.Results {
   background-color: #212121;
-  width: auto;
   display: inline-block;
   padding: 1.5em;
   margin-top: 2em;

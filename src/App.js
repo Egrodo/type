@@ -146,7 +146,6 @@ class App extends Component {
       <div className="App">
         <h1>Ten-Type <span className="version">(beta)</span></h1>
         <View wordList={wordList} cursor={cursor} active={active} />
-        <br />
         <UserInterface onType={this.onType} refresh={this.refresh} finish={this.finish} />
         {completed ? <Results data={completed} /> : ''}
         <p className="credits">

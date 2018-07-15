@@ -23,22 +23,22 @@ class View extends Component {
 
   render() {
     // TODO: Describe ternary to sort active word.
-    // TODO: Move logic for handling display to here.
-    // Move onType stuff to this function instead so it won't have to re-render every word on each char change.
     const { wordList } = this.props;
     const { cursor, active } = this.state;
     return (
-      <Container className="View">
-        <section className="row">
-          {wordList[0].map(((word, i) => (cursor <= i ? (
-            cursor === i ? (<Word word={word} key={`${i}_${word}`} active={active} />) : (
-              <Word word={word} key={`${i}_${word}`} active={3} />
-            )
-          ) : <Word word={word} key={`${i}_${word}`} />)
-          ))}
-        </section>
-        <section className="row">
-          {wordList[1].map(((word, i) => <Word word={word} key={`${i + 12}_${word}`} />))}
+      <Container className="block">
+        <section className="View">
+          <section className="row">
+            {wordList[0].map(((word, i) => (cursor <= i ? (
+              cursor === i ? (<Word word={word} key={`${i}_${word}`} active={active} />) : (
+                <Word word={word} key={`${i}_${word}`} active={3} />
+              )
+            ) : <Word word={word} key={`${i}_${word}`} />)
+            ))}
+          </section>
+          <section className="row">
+            {wordList[1].map(((word, i) => <Word word={word} key={`${i + 12}_${word}`} />))}
+          </section>
         </section>
       </Container>
     );

@@ -1,4 +1,4 @@
-div.ui.container.View {
+section.View {
   width: auto;
   max-width: 80vw;
   border-radius: .2em;
@@ -8,6 +8,6 @@ div.ui.container.View {
   user-select: none;
 }
 
-div.ui.container.View:hover {
+section.View:hover {
   cursor: inherit;
 }
