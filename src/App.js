@@ -3,7 +3,7 @@ import View from './components/View';
 import UserInterface from './components/UserInterface';
 import Results from './components/Results';
 import wordP from './wordProcessing';
-import './css/Controller.css';
+import './css/App.css';
 
 /*
   Typing test
@@ -32,9 +32,11 @@ class App extends Component {
       ],
       cursor: 0,
       active: 0,
-      correct: 0,
-      incorrect: 0,
-      finalScore: 0,
+      correctWords: 0,
+      incorrectWords: 0,
+      correctChars: 0,
+      incorrectChars: 0,
+      completed: false,
     };
 
     this.onType = this.onType.bind(this);
@@ -45,6 +47,14 @@ class App extends Component {
   componentDidMount() {
     // When the component first mounts generate two rows of random words.
     this.setState({ wordList: wordP.init(12) });
+
+    // Listener to capture F5 and handle 10ff style.
+    document.addEventListener('keydown', ((e) => {
+      if (e.key === 'F5') {
+        e.preventDefault();
+        this.refresh();
+      }
+    }), false);
   }
 
   // Handle change at Controller level in order to compare against correct.
@@ -52,20 +62,31 @@ class App extends Component {
     const {
       wordList,
       cursor,
-      correct,
-      incorrect,
+      correctWords,
+      incorrectWords,
+      correctChars,
+      incorrectChars,
     } = this.state;
     const correctWord = wordList[0][cursor];
 
     // If the input was a spacebar submit the word.
     if (submit) {
-      // I'm counting the length of the words for each correct / incorrect.
+      // I'm counting the length of the words for each correct / incorrect plus one for the space.
       // This method isn't entirely accurate (won't count the last word if someone is halfway thru one when timer ends).
       if (correctWord === word) {
-        await this.setState({ correct: (correct + word.length), active: 1 });
+        await this.setState({
+          correctChars: (correctChars + word.length) + 1,
+          correctWords: correctWords + 1,
+          active: 1,
+        });
       } else {
-        await this.setState({ incorrect: (incorrect + word.length), active: 2 });
+        await this.setState({
+          incorrectChars: (incorrectChars + correctWord.length) + 1,
+          incorrectWords: incorrectWords + 1,
+          active: 2,
+        });
       }
+
       // Check if we're at the end of the row.
       if ((cursor + 1) === wordList[0].length) {
         const newList = [wordList[1], wordP.newRow(12)];
@@ -86,18 +107,32 @@ class App extends Component {
   refresh() {
     this.setState({
       wordList: wordP.init(12),
-      correct: 0,
-      incorrect: 0,
       cursor: 0,
       active: 0,
+      correctWords: 0,
+      incorrectWords: 0,
+      correctChars: 0,
+      incorrectChars: 0,
     });
   }
 
   finish() {
-    // Function to be invoked at the end of the timer.
-    const { correct } = this.state;
-    const finalScore = Math.round(correct / 5);
-    this.setState({ finalScore });
+    // On finish, save the results to a separate obj and display them.
+    const {
+      correctWords,
+      incorrectWords,
+      correctChars,
+      incorrectChars,
+    } = this.state;
+
+    this.setState({
+      completed: {
+        correctWords,
+        incorrectWords,
+        correctChars,
+        incorrectChars,
+      },
+    });
   }
 
   render() {
@@ -105,19 +140,23 @@ class App extends Component {
       wordList,
       cursor,
       active,
-      correct,
-      incorrect,
-      finalScore,
+      completed,
     } = this.state;
+
     return (
-      <div className="Controller">
-        <h1>WPM TEST</h1>
+      <div className="App">
+        <h1>Ten-Type <span className="version">(beta)</span></h1>
         <View wordList={wordList} cursor={cursor} active={active} />
         <br />
         <UserInterface onType={this.onType} refresh={this.refresh} finish={this.finish} />
-        <div>
-          {finalScore ? <Results data={{ correct, incorrect, finalScore }} /> : ''}
-        </div>
+        {completed ? <Results data={completed} /> : ''}
+        <p className="credits">
+          Made by
+          <a href="https://github.com/Egrodo" target="_blank" rel="noopener noreferrer">
+            Noah Yamamoto
+          </a>
+          .
+        </p>
       </div>
     );
   }

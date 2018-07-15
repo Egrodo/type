@@ -26,6 +26,15 @@ div.ui.input input:focus {
   background-color: #303030;
 }
 
+div.ui.input input::selection {
+  background: #54c8ff;
+  color: hsla(0, 0%, 100%, 0.8);
+}
+
+div.ui.input input:disabled {
+  cursor: pointer;
+}
+
 div.Timer {
   display: inline-block;
   position: absolute;

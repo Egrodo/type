@@ -19,37 +19,44 @@ class UserInterface extends Component {
     this.timerEnd = this.timerEnd.bind(this);
   }
 
+  componentDidMount() {
+    // Capture refresh events.
+    document.addEventListener('keydown', ((e) => {
+      if (e.key === 'F5') {
+        this.setState({ input: '', started: false, disabled: false });
+        this.inpRef.current.focus();
+      }
+    }), false);
+  }
+
   onChange(e) {
     e.preventDefault();
     // If the change was a backspace ignore it.
     const word = e.target.value;
-    const { onType } = this.props;
     const { input, started } = this.state;
     // On change check if we've started a test yet. If we haven't, start the timer.
     if (!started) this.setState({ started: true });
 
     // Handle input and spacebar submits.
     if (word[word.length - 1] === ' ') {
-      onType(input, true);
+      this.props.onType(input, true);
       this.setState({ input: '' });
     } else {
       this.setState({ input: word });
-      onType(word, false);
+      this.props.onType(word, false);
     }
   }
 
   onClick() {
     // When the button is clicked, refresh the view / reset score & focus / clear the input box.
-    const { refresh } = this.props;
-    refresh();
+    this.props.refresh();
     this.inpRef.current.focus();
     this.setState({ input: '', started: false, disabled: false });
   }
 
   timerEnd() {
-    const { finish } = this.props;
     this.setState({ started: false, disabled: true });
-    finish();
+    this.props.finish();
   }
 
   render() {
@@ -62,6 +69,8 @@ class UserInterface extends Component {
             disabled={disabled}
             ref={this.inpRef}
             value={input}
+            spellCheck="false"
+            autoComplete="off"
             inverted
             autoFocus
             fluid
@@ -90,7 +99,7 @@ class UserInterface extends Component {
 UserInterface.propTypes = {
   onType: PropTypes.func,
   refresh: PropTypes.func,
-  finsish: PropTypes.func,
+  finish: PropTypes.func,
 };
 
 UserInterface.defaultProps = {

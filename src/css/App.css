@@ -1,0 +1,40 @@
+body {
+  font-family: Helvetica;
+  background-color: #000;
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  height: 100%;
+  overflow: hidden;
+}
+
+div.App {
+  display: block;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: .5em;
+}
+
+div.App h1 {
+  margin-bottom: .5em;
+}
+
+div.App h1 span.version {
+  font-size: .5em;
+}
+
+div.App p.credits {
+  position: fixed;
+  bottom: 1em;
+  width: 100%;
+}
+
+p.credits a {
+  color: #54c8ff;
+  padding-left: .4em;
+}
+
+p.credits a:hover {
+  text-decoration: underline;
+}

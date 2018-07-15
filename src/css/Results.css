@@ -1,0 +1,37 @@
+section.Results {
+  background-color: #212121;
+  width: auto;
+  display: inline-block;
+  padding: 1.5em;
+  margin-top: 2em;
+  border-radius: .2em;
+  text-align: right;
+}
+
+section.Results h1.headliner {
+  font-size: 2em;
+}
+
+section.Results h1.headliner:last-of-type {
+  margin-top: .5em;  
+}
+
+h1.headliner span {
+  margin-left: .4em;
+}
+
+section.Results h1.headliner,
+section.Results h3,
+section.Results h4 {
+  margin: 0;
+}
+
+h4.subInfo span:first-child {
+  color: #26a65b;
+  margin-right: .4em;
+}
+
+h4.subInfo span:last-child {
+  color: #fd1d1d;
+  margin-left: .4em;
+}
