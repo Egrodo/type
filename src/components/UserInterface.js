@@ -7,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Timer from './Timer';
-import '../css/Input.css';
+import '../css/UserInterface.css';
 
 class UserInterface extends Component {
   constructor() {
@@ -67,37 +67,35 @@ class UserInterface extends Component {
   render() {
     const { input, started, disabled } = this.state;
     return (
-      <Container className="block">
-        <section className="UserInterface">
-          <div className="Input">
-            <Input
-              onChange={this.onChange}
-              disabled={disabled}
-              ref={this.inpRef}
-              value={input}
-              spellCheck="false"
-              autoComplete="off"
-              inverted
-              autoFocus
-              fluid
-            />
-          </div>
-          <div className="Timer">
-            <Button
-              onClick={this.onClick}
-              animated="vertical"
-              color="blue"
-              inverted
-            >
-              <Button.Content visible>
-                {started ? <Timer end={this.timerEnd} /> : '1:00'}
-              </Button.Content>
-              <Button.Content hidden>
-                <Icon name="refresh" />
-              </Button.Content>
-            </Button>
-          </div>
-        </section>
+      <Container className="UserInterface">
+        <div className="Input">
+          <Input
+            onChange={this.onChange}
+            disabled={disabled}
+            ref={this.inpRef}
+            value={input}
+            spellCheck="false"
+            autoComplete="off"
+            inverted
+            autoFocus
+            fluid
+          />
+        </div>
+        <div className="Timer">
+          <Button
+            onClick={this.onClick}
+            animated="vertical"
+            color="blue"
+            inverted
+          >
+            <Button.Content visible>
+              {started ? <Timer end={this.timerEnd} /> : '1:00'}
+            </Button.Content>
+            <Button.Content hidden>
+              <Icon name="refresh" />
+            </Button.Content>
+          </Button>
+        </div>
       </Container>
     );
   }

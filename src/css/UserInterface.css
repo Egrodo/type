@@ -1,4 +1,4 @@
-section.UserInterface {
+div.ui.container.UserInterface {
   display: inline-block;
   position: relative;
   margin-top: 1em;

@@ -26,27 +26,23 @@ class View extends Component {
     const { wordList } = this.props;
     const { cursor, active } = this.state;
     return (
-      <Container className="block">
-        <section className="View">
-          <section className="row">
-            {wordList[0].map(((word, i) => (cursor <= i ? (
-              cursor === i ? (<Word word={word} key={`${i}_${word}`} active={active} />) : (
-                <Word word={word} key={`${i}_${word}`} active={3} />
-              )
-            ) : <Word word={word} key={`${i}_${word}`} />)
-            ))}
-          </section>
-          <section className="row">
-            {wordList[1].map(((word, i) => <Word word={word} key={`${i + 12}_${word}`} />))}
-          </section>
+      <section className="View">
+        <section className="row">
+          {wordList[0].map(((word, i) => (cursor <= i ? (
+            cursor === i ? (<Word word={word} key={`${i}_${word}`} active={active} />) : (
+              <Word word={word} key={`${i}_${word}`} active={3} />
+            )
+          ) : <Word word={word} key={`${i}_${word}`} />)
+          ))}
         </section>
-      </Container>
+        <section className="row">
+          {wordList[1].map(((word, i) => <Word word={word} key={`${i + 12}_${word}`} />))}
+        </section>
+      </section>
     );
   }
 }
 
-
-// TODO: Loadmore is temporarily here.
 View.propTypes = {
   wordList: PropTypes.arrayOf(PropTypes.array),
   cursor: PropTypes.number,
