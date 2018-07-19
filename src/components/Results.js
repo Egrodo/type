@@ -20,26 +20,26 @@ const Results = (props) => {
         {finalScore}
         <span title="Words Per Minute (1 word = 5 characters)">
           WPM
-          </span>
+        </span>
       </h1>
       <h4>Top X%</h4>
       <h4>{accuracy}% Accuracy</h4>
       <h4 className="subInfo">
         (<span>{correctWords}</span>
         +
-          <span>{incorrectWords}</span>)
-        </h4>
+        <span>{incorrectWords}</span>)
+      </h4>
       <h1 className="headliner">
         {correctChars + incorrectChars}
         <span title="Characters Per Minute">
           CPM
-          </span>
+        </span>
       </h1>
       <h4 className="subInfo">
         (<span>{correctChars}</span>
         +
-          <span>{incorrectChars}</span>)
-        </h4>
+        <span>{incorrectChars}</span>)
+      </h4>
     </section>
   );
 };
