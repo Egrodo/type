@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Word from './Word';
 import '../css/View.css';
