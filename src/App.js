@@ -91,8 +91,7 @@ class App extends Component {
       // Check if we're at the end of the row.
       if ((cursor + 1) === wordList[0].length) {
         const newList = [wordList[1], wordP.newRow(12)];
-        this.setState({ wordList: newList, cursor: 0 });
-        this.setState(prevState => ({ count: prevState.count + 12 }));
+        this.setState(prevState => ({ wordList: newList, cursor: 0, count: prevState.count + 12 }));
       } else {
         await this.setState({ cursor: cursor + 1 });
         this.setState({ active: 0 });
@@ -110,7 +109,6 @@ class App extends Component {
     this.setState({
       wordList: wordP.init(12),
       cursor: 0,
-      count: 0,
       active: 0,
       correctWords: 0,
       incorrectWords: 0,

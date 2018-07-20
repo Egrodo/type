@@ -24,13 +24,17 @@ class Word extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { active } = nextProps;
-    if (active === 0) {
-      this.setState({ status: 'active' });
-    } else if (active === 1) {
-      this.setState({ status: 'active correct' });
-    } else if (active === 2) {
-      this.setState({ status: 'active incorrect' });
+    if (nextProps.word !== this.state.word) {
+      this.setState({ word: nextProps.word, status: '' });
+    } else {
+      const { active } = nextProps;
+      if (active === 0) {
+        this.setState({ status: 'active' });
+      } else if (active === 1) {
+        this.setState({ status: 'active correct' });
+      } else if (active === 2) {
+        this.setState({ status: 'active incorrect' });
+      }
     }
   }
 
