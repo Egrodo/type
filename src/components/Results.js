@@ -22,7 +22,6 @@ const Results = (props) => {
           WPM
         </span>
       </h1>
-      <h4>Top X%</h4>
       <h4>{accuracy}% Accuracy</h4>
       <h4 className="subInfo">
         (<span>{correctWords}</span>

@@ -1,5 +1,5 @@
 div.ui.container.UserInterface {
-  display: inline-block;
+  display: block;
   position: relative;
   margin-top: 1em;
 }
@@ -15,13 +15,13 @@ div.ui.input input {
   border-radius: .2em;
   text-align: center;
   background-color: #303030;
-  outline-color: #630077;
   color: #fff;
   border: none;
 }
 
 div.ui.input input:focus, div.ui.input input:active {
   color: #fff;
+  outline: 1px solid #54c8ff;
   box-shadow: none;
   background-color: #303030;
 }

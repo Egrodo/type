@@ -1,11 +1,23 @@
-section.View {
-  width: auto;
-  max-width: 80vw;
+div.ui.container.View {
+  width: 100%;
+  display: block;
+}
+
+.container.View section.rowContainer {
+  display: inline-block;
+  margin: auto;
   border-radius: .2em;
   padding: .5em 2em .7em;
-  display: inline-block;
   background-color: #212121;
   user-select: none;
+}
+
+section.row {
+  display: block;
+}
+
+section.row:first-of-type {
+  margin-bottom: 1em;
 }
 
 section.View:hover {

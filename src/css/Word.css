@@ -1,8 +1,16 @@
 span.Word {
   font-size: 1.5em;
-  margin: .5rem;
   display: inline-block;
   color: hsla(0, 0%, 100%, 0.6);
+  /* padding-bottom: .3rem; */
+}
+
+span.Word:first-of-type {
+  padding-right: .5rem;
+}
+
+span.Word:not(:first-of-type) {
+  padding: 0 .5rem;
 }
 
 span.Word.active {
@@ -14,7 +22,6 @@ span.Word.active {
 span.Word.correct {
   color: #26a65b;
   border-bottom: 2px solid #26a65b;
-
 }
 
 span.Word.incorrect {

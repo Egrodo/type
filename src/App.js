@@ -22,6 +22,7 @@ class App extends Component {
 
     /*
       wordList: a 2d array wherein each array represents a visual row.
+      count: a count of how many words we've loaded so far.
       cursor: the index (on the first row/arr) of the word we're currently working with.
       active: a ternary where 0: active & untouched, 1: active & correct, 2: active & incorrect.
     */
@@ -30,6 +31,7 @@ class App extends Component {
         [],
         [],
       ],
+      count: 0,
       cursor: 0,
       active: 0,
       correctWords: 0,
@@ -90,6 +92,7 @@ class App extends Component {
       if ((cursor + 1) === wordList[0].length) {
         const newList = [wordList[1], wordP.newRow(12)];
         this.setState({ wordList: newList, cursor: 0 });
+        this.setState(prevState => ({ count: prevState.count + 12 }));
       } else {
         await this.setState({ cursor: cursor + 1 });
         this.setState({ active: 0 });
@@ -107,6 +110,7 @@ class App extends Component {
     this.setState({
       wordList: wordP.init(12),
       cursor: 0,
+      count: 0,
       active: 0,
       correctWords: 0,
       incorrectWords: 0,
@@ -137,6 +141,7 @@ class App extends Component {
   render() {
     const {
       wordList,
+      count,
       cursor,
       active,
       completed,
@@ -145,7 +150,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Ten-Type <span className="version">(beta)</span></h1>
-        <View wordList={wordList} cursor={cursor} active={active} />
+        <View wordList={wordList} cursor={cursor} active={active} count={count} />
         <UserInterface onType={this.onType} refresh={this.refresh} finish={this.finish} />
         {completed ? <Results data={completed} /> : ''}
         <p className="credits">
