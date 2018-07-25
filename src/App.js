@@ -106,6 +106,7 @@ class App extends Component {
   }
 
   refresh() {
+    // BUG: Occasionally a word will maintain its status through refreshes if same word @ same position?
     this.setState({
       wordList: wordP.init(12),
       cursor: 0,
